@@ -1,22 +1,28 @@
-<div align="center">
-  <h1 align="center">@rvn-website</h1>
+<h1 align="center">
+  <img src="./public/favicon.svg" width="48" height="48" align="center">
+  rvncom/website
+</h1>
 
-  <img src="docs/images/readme-card.png" alt="Readme Card" width="90%" />
-  
-  <p align="center">
-    <img src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js">
-    <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black" alt="React">
-    <img src="https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-    <img src="https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind">
-    <img src="https://img.shields.io/badge/tRPC-11-2596be?style=flat-square&logo=trpc&logoColor=white" alt="tRPC">
-    <img src="https://img.shields.io/badge/Drizzle-PostgreSQL-c5f74f?style=flat-square&logo=drizzle&logoColor=black" alt="Drizzle ORM">
-    <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis">
-    <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
-    <img src="https://img.shields.io/badge/Rust→WASM-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust WASM">
-  </p>
-</div>
+<p align="center">
+  <img src="docs/images/readme-card.png" alt="RVN Website" width="90%" />
+</p>
 
-## Tech Stack
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js">
+  <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-6.0-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind">
+  <img src="https://img.shields.io/badge/tRPC-11-2596be?style=flat-square&logo=trpc&logoColor=white" alt="tRPC">
+  <img src="https://img.shields.io/badge/Drizzle-PostgreSQL-c5f74f?style=flat-square&logo=drizzle&logoColor=black" alt="Drizzle ORM">
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+</p>
+
+> **🔒 Private Repository** — The source code for this service is not publicly available. This repository contains only documentation, environment examples, and public assets. No external contributions or access to the source code.
+
+---
+
+## 🚀 Tech Stack
 
 **Core** — Next.js 16, React 19, TypeScript, Tailwind CSS, Radix UI
 
@@ -28,13 +34,15 @@
 
 **Infra** — Docker, Rust → WASM (image processing), Turbopack
 
-## Documentation
+## 📚 Documentation
 
 ### Authentication
 
 | Document | Description |
 |----------|-------------|
 | [Authentication architecture](docs/auth/architecture.en.md) | Sessions, device tokens, OAuth, password hashing, cookies |
+| [OAuth providers](docs/auth/oauth.en.md) | Google / Yandex / Twitch / VK / Telegram / GitHub-admin flows, CSRF state, popup vs full-page, account linking |
+| [Sessions & Cookies](docs/auth/sessions.en.md) | `token` / `session_id` / `user_data` cookies, token binding, refresh flow, logout, session store |
 | [Device fingerprinting](docs/auth/device-fingerprint.en.md) | Two-layer FPID system, IndexedDB, server-side hashing, deduplication |
 | [Device IP geolocation](docs/auth/geolocation.en.md) | MaxMind GeoLite2, ip-api.com fallback, caching, storage format |
 
@@ -43,60 +51,45 @@
 | Document | Description |
 |----------|-------------|
 | [Notification system](docs/notifications/notifications.en.md) | Real-time notifications, UPSERT grouping, WebSocket delivery, caching |
+| [Notification types](docs/notifications/types.en.md) | Type catalog, UPSERT semantics, cleanup policy, read paths, system broadcasts |
 
 ### WebSocket
 
 | Document | Description |
 |----------|-------------|
 | [WebSocket architecture](docs/websocket/architecture.en.md) | Connection, rooms, broadcast, authentication |
-| [Event Directory](docs/websocket/events.en.md.md) | Client/server events, error codes, REST endpoints |
+| [Event Directory](docs/websocket/events.en.md) | Client/server events, error codes, REST endpoints |
+| [Reconnection & resilience](docs/websocket/reconnection.en.md) | Socket.IO retry strategy, debounce, token rotation, room rejoin, broadcast model |
 
----
+### Security
 
-## Setup
+| Document | Description |
+|----------|-------------|
+| [Bot Protection](docs/security/protection.en.md) | Proxy middleware, suspicion detector, rate limiting, CSRF, security headers |
+| [Security Headers & CSP](docs/security/headers.en.md) | CSP directives, HSTS, CORS, static-file handling, origin validation |
+| [Role-Based Access Control](docs/security/rbac.en.md) | `user` / `support` / `admin` roles, tRPC middleware, `pex` cookie flag, cache invalidation |
 
-```bash
-cp .env.example .env
-pnpm install
-pnpm run build:wasm
-pnpm run build
-pnpm dev
-```
+### Storage & Media
 
-## Scripts
+| Document | Description |
+|----------|-------------|
+| [Storage & Media](docs/storage/storage.en.md) | S3-compatible upload, Redis media cache (gzip + TTL), WASM (Rust) Image Processor |
+| [Upload pipeline](docs/storage/upload.en.md) | Magic-byte validation, per-route specifics (avatar/banner/support), thumbhash, cache warm-up |
 
-```bash
-pnpm dev               # dev server
-pnpm build             # production build
-pnpm start             # production server
-pnpm test              # vitest
-pnpm lint              # oxlint
-pnpm format            # prettier
-```
+### Subscriptions & Payments
 
-## Project Structure
+| Document | Description |
+|----------|-------------|
+| [Subscriptions & Payments](docs/subscriptions/subscriptions.en.md) | Plan catalogue, Remnawave provisioning, balance/promo/external purchase flows, payment webhook |
+| [Balance & Promo](docs/subscriptions/balance.en.md) | `users.balance`, `payments`, `balance_transactions` ledger, test promo, top-up & purchase flows |
 
-```
-app/
-├── auth/              # login, register, OAuth
-├── dashboard/         # user dashboard
-├── admin/             # admin panel
-├── support/           # ticket system
-├── user/settings/     # profile settings
-├── api/               # tRPC, websocket, uploads
-└── protection/        # bot/DDoS protection
+### Database
 
-lib/
-├── auth/              # sessions, device fingerprint
-├── database/          # drizzle, redis, cache
-├── storage/           # S3, media cache
-├── trpc/              # routers (auth, user, admin)
-└── websocket/         # socket.io server
+| Document | Description |
+|----------|-------------|
+| [Migrations](docs/database/migrations.en.md) | Drizzle Kit workflow, custom migrations for triggers/CHECK constraints, `db:generate` / `db:migrate` scripts, bootstrap on existing DBs |
 
-wasm/                  # Rust image processing
-```
-
-## Environment
+## 🌐 Environment
 
 `.env.example`:
 
